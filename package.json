@@ -1,0 +1,27 @@
+{
+  "name": "personal_node_radio",
+  "version": "0.0.1",
+  "description": "A node-based personal radio that uses Shoutcast streams, node and blacklist to filter out songs from a set of stations",
+  "main": "start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/23tux/personal_node_radio.git"
+  },
+  "keywords": [
+    "node",
+    "shoutcast",
+    "radio",
+    "personal"
+  ],
+  "author": "Hubert Hölzl",
+  "license": "BSD",
+  "dependencies": {
+    "icecast-stack": "~0.3.0",
+    "colors": "~0.6.0-1",
+    "dnode": "~1.0.2"
+  }
+}
