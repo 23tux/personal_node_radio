@@ -4,12 +4,20 @@ var whitelistPath = "./data/whitelist.txt";
 
 // holds the data for white and black lists
 function Data() {
-  var self = this;
+  var self = this, lines;
   self.stations = require('./data/stations');
   self.blacklist = [];
-  self.blacklist = fs.readFileSync(blacklistPath, 'utf8').split("\n");
   self.whitelist = [];
-  self.whitelist = fs.readFileSync(whitelistPath, 'utf8').split("\n");
+  fs.readFile(blacklistPath, 'utf8', function(err,data) {
+    if( ! err ) {
+      self.blacklist = data.split("\n");
+    }
+  });
+  fs.readFile(whitelistPath, 'utf8', function(err,data) {
+    if( ! err ) {
+      self.whitelist = data.split("\n");
+    }
+  });
 }
 
 // adds another line to the blacklist
