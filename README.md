@@ -58,7 +58,7 @@ and replace it with the absolute path to your node binary and the path to the ``
 
 The project hold it's data in the ``data`` dir. There you have a ``blacklist.txt``, ``whitelist.txt`` and a ``stations.json``. Have a look into the JSON file. Here you can configure which stations should be played:
 
-```
+``` json
 [
   {"name": "181.fm - The Eagle (Your Home For REAL Classic Rock!)", "url": "http://108.61.73.118:8030"},
   {"name": "Rockantenne Live", "url": "http://mp3channels.webradio.antenne.de/classic-rock-live"},
@@ -80,7 +80,7 @@ The ``blacklist.txt`` contains the songs that you don't like. You can edit them,
 
 When I began working on this project, I first had a look at an audio stream from a shoutcast server. I tried to extract the metadata from the stream by opening a socket to it and parsing the metadata. This stackoverflow post helped me lot [Stackoverflow: Pulling Track Info From an Audio Stream Using PHP](http://stackoverflow.com/questions/4911062/pulling-track-info-from-an-audio-stream-using-php/4914538#4914538). I came up with a hacky solution like this:
 
-```
+``` javascript
 var net = require('net');
 
 var socket = new net.Socket();
@@ -140,7 +140,7 @@ The SwitchEngine is the control part of the application. First, it creates the s
 
 ``switch_enginge.js:13``
 
-```
+``` javascript
 function SwitchEngine() {
   var self = this;
   self.stations = [];
@@ -164,7 +164,7 @@ That leads us to the ``inBlacklist`` method. This method has a track as an argum
 
 ``switch_enginge.js:66``
 
-```
+``` javascript
 // Returns a station where a song is played, that is not in the blacklist
 SwitchEngine.prototype.findStation = function() {
   for (var i=0; i < this.stations.length; i++) {
@@ -182,7 +182,7 @@ To provide the clients a server, we need to create one. This is done in the ``se
 
 ``server.js:4``
 
-```
+``` javascript
 // creates the server that the clients can connect to
 function Server() {
   var self = this;
@@ -207,7 +207,7 @@ When a request is received, the server checks if a station is currently active. 
 
 ``server.js:28``
 
-```
+``` javascript
 // writes the headers
 Server.prototype.writeHeaders = function(req, res) {
   var headers = {
@@ -225,7 +225,7 @@ Hey, we got a switch engine and a server. But no data. Lets do this in the ``sta
 
 ``station.js:54``
 
-```
+``` javascript
 // When a 'metadata' event happens, usually a new song is starting.
 self.stream.on('metadata', function(metadata) {
   self.currentTrack = icecast.parseMetadata(metadata).StreamTitle;
@@ -239,7 +239,7 @@ We can use the metadata event from the icecast-stack package, and use that very 
 
 ``station.js:43``
 
-```
+``` javascript
 // gets called when chunks of data are retrieved
 self.stream.on("data", function (chunk) {
   if(self.active) {
